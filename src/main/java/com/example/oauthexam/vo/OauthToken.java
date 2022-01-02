@@ -30,13 +30,13 @@ public class OauthToken {
         public static class accessToken {
             public String code;
             private String grant_type;
-            private String redirect_url;
+            private String redirect_uri;
 
             public Map getMapData() {
                 Map map = new HashMap<>();
                 map.put("code", code);
                 map.put("grant_type", grant_type);
-                map.put("redirect_url", redirect_url);
+                map.put("redirect_url", redirect_uri);
                 return map;
             }
         }
