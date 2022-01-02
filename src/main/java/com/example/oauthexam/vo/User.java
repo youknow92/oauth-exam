@@ -9,8 +9,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 
 @Data
 @Entity
@@ -33,7 +33,7 @@ public class User implements UserDetails {
     //권한 (기본 권한 세팅)
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
+        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
     @Override
@@ -49,35 +49,23 @@ public class User implements UserDetails {
     //계정 만료
     @Override
     public boolean isAccountNonExpired() {
-        if (StringUtils.equalsIgnoreCase(state, "A")) {
-            return false;
-        }
-        return true;
+        return !StringUtils.equalsIgnoreCase(state, "A");
     }
 
     //잠긴 계정
     @Override
     public boolean isAccountNonLocked() {
-        if (StringUtils.equalsIgnoreCase(state, "L")) {
-            return false;
-        }
-        return true;
+        return !StringUtils.equalsIgnoreCase(state, "L");
     }
 
     //패스워드 만료
     @Override
     public boolean isCredentialsNonExpired() {
-        if (StringUtils.equalsIgnoreCase(state, "P")) {
-            return false;
-        }
-        return true;
+        return !StringUtils.equalsIgnoreCase(state, "P");
     }
 
     @Override
     public boolean isEnabled() {
-        if (isCredentialsNonExpired() && isAccountNonExpired() && isAccountNonLocked()) {
-            return true;
-        }
-        return false;
+        return isCredentialsNonExpired() && isAccountNonExpired() && isAccountNonLocked();
     }
 }

@@ -17,8 +17,12 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private final CustomAuthenticationProvider customAuthenticationProvider;
+
     @Autowired
-    private CustomAuthenticationProvider customAuthenticationProvider;
+    public SecurityConfig(CustomAuthenticationProvider customAuthenticationProvider) {
+        this.customAuthenticationProvider = customAuthenticationProvider;
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -33,8 +37,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * authenticationManager bean 생성 하여 셋팅 안할시 grant_type : password 지원 안함
-     * @return
-     * @throws Exception
      */
     @Bean
     @Override
@@ -44,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     // 커스텀 인증 : 어떤 사용자인지 확인하는 메소드 커스텀
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    protected void configure(AuthenticationManagerBuilder auth) {
         auth.authenticationProvider(customAuthenticationProvider);
     }
 

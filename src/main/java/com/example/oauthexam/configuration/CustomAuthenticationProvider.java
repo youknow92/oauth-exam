@@ -17,8 +17,12 @@ import org.apache.commons.lang3.StringUtils;
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
+    private final UserDetailService userDetailService;
+
     @Autowired
-    private UserDetailService userDetailService;
+    public CustomAuthenticationProvider(UserDetailService userDetailService) {
+        this.userDetailService = userDetailService;
+    }
 
     @Override
     public boolean supports(Class<?> authentication) {

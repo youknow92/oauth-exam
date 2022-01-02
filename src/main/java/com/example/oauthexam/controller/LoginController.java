@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.Map;
+import java.util.Objects;
 
 @SessionAttributes("authorizationRequest")
 // authorizationRequest(로그인 인증 관련 정보)에 대한 값을 세션에 자동으로 저장 하는 것으로 해당 클래스에서 변경 하지 않는다면 선언 하지 않아도 된다.
@@ -22,8 +23,12 @@ import java.util.Map;
 @Controller
 public class LoginController {
 
+    private final TokenEndpoint tokenEndpoint;
+
     @Autowired
-    private TokenEndpoint tokenEndpoint;
+    public LoginController(TokenEndpoint tokenEndpoint) {
+        this.tokenEndpoint = tokenEndpoint;
+    }
 
     @RequestMapping(value = "/oauth/login", method = RequestMethod.GET)
     public String login(@RequestParam(value = "error", required = false) String error, Model model) {
@@ -62,7 +67,7 @@ public class LoginController {
 
         }
 
-        log.info("## get token => {} | {}", response.getBody().getAdditionalInformation(), grantType);
+        log.info("## get token => {} | {}", Objects.requireNonNull(response.getBody()).getAdditionalInformation(), grantType);
 
         return response;
     }
