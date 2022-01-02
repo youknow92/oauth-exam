@@ -48,7 +48,7 @@ public class OauthToken {
 
             public Map getMapData() {
                 Map<String, Object> map = new HashMap<>();
-                map.put("redirect_url", refreshToken);
+                map.put("refresh_token", refreshToken);
                 map.put("grant_type", grant_type);
                 return map;
             }

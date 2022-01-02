@@ -35,7 +35,7 @@ public class Oauth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        security.tokenKeyAccess("permitAll()") // 모두 허용하지 않으면 해당 서버에서 토큰 접근이 불가능 하여 토큰을 DB에서 찾을 수 없다.
+        security.tokenKeyAccess("permitAll()") // 모두 허용하지 않으면 '/oauth/token_key' URL은 404 에러와 토큰을 DB에 저장 할 수 없어 필수 (isAuthenticated()로 설정시 'token_key' 호출시 404 에러 발생 > 모두 허용 또는 허용 안함중에 하나 인것으로 보임)
 //                .checkTokenAccess("isAuthenticated()") // 인증된 사용자만 토큰 체크 가능 '/oauth/check_token' 가능 (JWT 일때는 필요 없음)
                 .allowFormAuthenticationForClients();
     }

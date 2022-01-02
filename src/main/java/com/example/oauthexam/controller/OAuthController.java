@@ -13,10 +13,10 @@ public class OAuthController {
     @RequestMapping("/callback")
     public OauthToken.response code(@RequestParam String code){
 
-        String cridentials = "clientId:secretKey";
+        String credentials = "clientId:secretKey";
         // base 64로 인코딩 (basic auth 의 경우 base64로 인코딩 하여 보내야한다.)
         String encodingCredentials = new String(
-                Base64.encodeBase64(cridentials.getBytes())
+                Base64.encodeBase64(credentials.getBytes())
         );
         String requestCode = code;
         OauthToken.request.accessToken request = new OauthToken.request.accessToken(){{

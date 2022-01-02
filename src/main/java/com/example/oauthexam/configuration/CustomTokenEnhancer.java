@@ -15,16 +15,16 @@ import java.util.Map;
 public class CustomTokenEnhancer implements TokenEnhancer {
     @Override
     public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
-        if (authentication.getPrincipal() instanceof User) {
+//        if (authentication.getPrincipal() instanceof User) {
             User user = (User) authentication.getPrincipal();
             Map<String, Object> additionalInfo = new HashMap<>();
             additionalInfo.put("corin_id", user.getId());
             additionalInfo.put("corin_nick_name", user.getNickname());
             ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInfo);
             return accessToken;
-        }else{
-
-        }
-        return accessToken;
+//        }else{
+//
+//        }
+//        return accessToken;
     }
 }

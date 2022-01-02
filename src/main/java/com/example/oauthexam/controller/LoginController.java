@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.Map;
 
-@SessionAttributes("authoricationRequset")
+@SessionAttributes("authorizationRequest")
 // authorizationRequest(로그인 인증 관련 정보)에 대한 값을 세션에 자동으로 저장 하는 것으로 해당 클래스에서 변경 하지 않는다면 선언 하지 않아도 된다.
 @Slf4j
 @Controller

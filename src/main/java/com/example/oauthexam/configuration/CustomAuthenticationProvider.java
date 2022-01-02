@@ -21,6 +21,12 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     private UserDetailService userDetailService;
 
     @Override
+    public boolean supports(Class<?> authentication) {
+        return authentication.equals(UsernamePasswordAuthenticationToken.class);
+    }
+
+    // 로그인 버튼 클릭시 사용자 체크 메소드
+    @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = (String) authentication.getPrincipal();
         String password = (String) authentication.getCredentials();
@@ -34,10 +40,5 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         log.error("## => {} | {} | {}", username, password, info.getAuthorities());
         // principal 정보는 jwt 토큰 생성시 추가정보 넣는데 사용하오니 필요한 정보는 여기서 넣어주세요.
         return new UsernamePasswordAuthenticationToken(info,password,info.getAuthorities());
-    }
-
-    @Override
-    public boolean supports(Class<?> authentication) {
-        return authentication.equals(UsernamePasswordAuthenticationToken.class);
     }
 }
