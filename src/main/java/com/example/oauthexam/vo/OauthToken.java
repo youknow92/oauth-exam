@@ -6,6 +6,9 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 토큰 관련 정보
+ */
 @Data
 public class OauthToken {
     @JsonIgnoreProperties(ignoreUnknown = true)

@@ -12,6 +12,7 @@ public class OAuthController {
     //클라이언트가 구현해야하는 코드 - 발급 받은 코드로 토큰 발행
     @RequestMapping("/callback")
     public OauthToken.response code(@RequestParam String code) {
+
         String credentials = "clientId:secretKey";
         //base64로 인코딩 (basic auth의 경우 base64로 인코딩 하여 보내야한다.)
         String encodingCredentials = new String(Base64.encodeBase64(credentials.getBytes()));
