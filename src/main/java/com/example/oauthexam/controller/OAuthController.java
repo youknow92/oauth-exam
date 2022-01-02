@@ -19,7 +19,7 @@ public class OAuthController {
         OauthToken.request.accessToken request = new OauthToken.request.accessToken(){{
             setCode(requestCode);
             setGrant_type("authorization_code");
-            setRedirect_url("http://localhost:8081/callback");
+            setRedirect_uri("http://localhost:8081/callback");
         }};
         //oauth 서버에 http 통신으로 토큰 발행
         OauthToken.response oauthToken = Unirest.post("http://localhost:8081/oauth/token")
