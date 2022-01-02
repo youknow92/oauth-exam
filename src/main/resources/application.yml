@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/oauth2?serverTimezone=UTC&characterEncoding=UTF-8
+    username: root
+    password: 1111
+    initialization-mode: never
+  jpa: # DB ?? ?? ?? ??? ?? ??? ??? ??.
+    show-sql: true
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+#    hibernate:
+#      ddl-auto: update
+  main:
+    allow-bean-definition-overriding: true # userDetailService ?? ??? ?? ?? ??? ??? ??? ??? ?? ??
+server:
+  port: 8081 # ?? ??
